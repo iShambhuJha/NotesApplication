@@ -18,6 +18,7 @@ export class CreateNoteComponent implements OnInit {
   ngOnInit() {
     this.isText = false;
   }
+  // Input event for textbox
   onTextChange(evt) {
     if (evt.length == 1) {
       if (this.isText == true) {

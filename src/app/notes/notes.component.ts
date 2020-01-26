@@ -72,6 +72,7 @@ export class NotesComponent implements OnInit, AfterViewInit {
     this.isText = this.createNote.isText;
 
   }
+  // Binding textbox value to the side bar note
   public textBind(data: any): void {
     console.log(data)
     this.notes.map(x => {
@@ -85,6 +86,7 @@ export class NotesComponent implements OnInit, AfterViewInit {
       }
     });
   }
+  //Binding selected note to textarea
   public onNoteSelection(data: any): void {
 
     this.selectedNoteData = data.noteTitle;

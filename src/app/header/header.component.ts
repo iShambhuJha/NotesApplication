@@ -35,6 +35,7 @@ export class HeaderComponent implements OnInit {
     localStorage.setItem('allNotes', JSON.stringify(this.allNotes));
     this.sharedservice.isDeleteClicked.next(true);
   }
+  // Event to be fired once the user enters some text on search bar
   search(data) {
     console.log(data, 'data')
     this.searchData = data;
