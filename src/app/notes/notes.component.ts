@@ -63,7 +63,6 @@ export class NotesComponent implements OnInit, AfterViewInit {
     this.changeSearchSubscription = this.sharedService.isSearchClicked.subscribe(resp => {
       if (resp == true) {
         this.searchInput = this.header.searchData;
-        console.log(this.searchInput, 'der');
       }
     });
 
@@ -74,7 +73,6 @@ export class NotesComponent implements OnInit, AfterViewInit {
   }
   // Binding textbox value to the side bar note
   public textBind(data: any): void {
-    console.log(data)
     this.notes.map(x => {
       if (x.id == (this.notes.length).toString()) {
         if (data == '') {
@@ -91,6 +89,5 @@ export class NotesComponent implements OnInit, AfterViewInit {
 
     this.selectedNoteData = data.noteTitle;
     this.selectedNoteToDelete = data;
-    console.log(this.selectedNoteData)
   }
 }

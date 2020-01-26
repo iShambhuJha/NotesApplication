@@ -18,7 +18,6 @@ export class HeaderComponent implements OnInit {
   ngOnInit() {
     this.date = new Date();
     this.time = this.date.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })
-    console.log(this.date.getTime())
   }
   onCreateClick() {
     this.sharedservice.isCreateClicked.next(true);
@@ -31,13 +30,11 @@ export class HeaderComponent implements OnInit {
         this.allNotes.splice(index, 1);
       }
     })
-    console.log('this.allNotesdeleted', this.allNotes)
     localStorage.setItem('allNotes', JSON.stringify(this.allNotes));
     this.sharedservice.isDeleteClicked.next(true);
   }
   // Event to be fired once the user enters some text on search bar
   search(data) {
-    console.log(data, 'data')
     this.searchData = data;
     this.sharedservice.isSearchClicked.next(true);
 
