@@ -51,9 +51,7 @@ export class NotesComponent implements OnInit, AfterViewInit {
     })
     this.changeCreateSubscription = this.sharedService.isCreateClicked.subscribe(resp => {
       if (resp == true) {
-
-        this.notes.unshift({ id: (this.notes.length + 1).toString(), noteTime: this.noteDefaultTime, noteTitle: this.newNote, noteText: 'No additional text' });
-
+       this.notes.unshift({ id: (this.notes.length + 1).toString(), noteTime: this.noteDefaultTime, noteTitle: this.newNote, noteText: 'No additional text' });
         localStorage.setItem('allNotes', JSON.stringify(this.notes));
       }
     });
