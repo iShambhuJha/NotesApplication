@@ -8,7 +8,7 @@ import { SharedService } from '../shared.service';
 })
 export class HeaderComponent implements OnInit {
 
-  @Input() childMessage: any=[];
+  @Input() childMessage: any = [];
   allNotes: any;
   date: Date;
   time: any;
@@ -16,19 +16,19 @@ export class HeaderComponent implements OnInit {
   constructor(private sharedservice: SharedService) { }
 
   ngOnInit() {
-  this.date = new Date();
-  this.time = this.date.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })
-  console.log(this.date.getTime())
+    this.date = new Date();
+    this.time = this.date.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })
+    console.log(this.date.getTime())
   }
   onCreateClick() {
-this.sharedservice.isCreateClicked.next(true);
+    this.sharedservice.isCreateClicked.next(true);
   }
   onDeleteClick() {
     this.allNotes = JSON.parse(localStorage.getItem('allNotes'));
-    this.allNotes.map(ele=>{
-      if(this.childMessage.id == ele.id){
+    this.allNotes.map(ele => {
+      if (this.childMessage.id == ele.id) {
         let index = this.allNotes.indexOf(ele);
-        this.allNotes.splice(index,1);
+        this.allNotes.splice(index, 1);
       }
     })
     console.log('this.allNotesdeleted', this.allNotes)
@@ -36,7 +36,7 @@ this.sharedservice.isCreateClicked.next(true);
     this.sharedservice.isDeleteClicked.next(true);
   }
   search(data) {
-    console.log(data,'data')
+    console.log(data, 'data')
     this.searchData = data;
     this.sharedservice.isSearchClicked.next(true);
 

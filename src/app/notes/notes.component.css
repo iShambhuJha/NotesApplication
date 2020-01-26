@@ -1,9 +1,10 @@
 .card:hover{
   background-color: #faedbc;
 }
-.highlighted{
-  background-color: yellow;
-}
-::ng-deep .yellow{
-  background: yellow;
+@media (min-width: 768px) {
+  .collapse.dont-collapse-sm {
+    display: block;
+    height: auto !important;
+    visibility: visible;
+  }
 }

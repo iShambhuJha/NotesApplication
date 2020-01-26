@@ -12,19 +12,20 @@ export class CreateNoteComponent implements OnInit {
   @Input() childMessage: string;
   changeCreateSubscription: any;
   txtNotes: string;
-  constructor( private sharedService: SharedService) { }
+  changeDelSubscription: any;
+  constructor(private sharedService: SharedService) { }
 
   ngOnInit() {
     this.isText = false;
   }
   onTextChange(evt) {
-    if(evt.length==1){
-      if(this.isText == true){
+    if (evt.length == 1) {
+      if (this.isText == true) {
         return;
       }
       this.isText = true;
-      this.sharedService.isChanged.next(this.isText) ;
+      this.sharedService.isChanged.next(this.isText);
     }
     this.onTextareaChanged.emit(evt);
-}
+  }
 }

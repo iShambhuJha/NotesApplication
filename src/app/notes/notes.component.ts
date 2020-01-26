@@ -12,39 +12,48 @@ import { SharedService } from '../shared.service';
 export class NotesComponent implements OnInit, AfterViewInit {
   @ViewChild(HeaderComponent, { static: false }) header;
   @ViewChild(CreateNoteComponent, { static: false }) createNote;
-  notes = [
-    { id: '1',noteTime:'4:20 PM', noteTitle: 'note1', noteText: 'newURI notes first' },
-    { id: '2',noteTime:'4:20 PM', noteTitle: 'note2', noteText: 'newURI notes second' },
-    { id: '3',noteTime:'4:20 PM', noteTitle: 'note3', noteText: 'newURI notes third' },
-    { id: '4',noteTime:'4:20 PM', noteTitle: 'note4', noteText: 'newURI notes fourth' },
-    { id: '5',noteTime:'4:20 PM', noteTitle: 'note5', noteText: 'newURI notes fifth' },
-    { id: '6',noteTime:'4:20 PM', noteTitle: 'note6', noteText: 'newURI notes sixth' },
-    { id: '7',noteTime:'4:20 PM', noteTitle: 'note7', noteText: 'newURI notes seventh' },
-  ];
+
   noteDefaultTime: string;
   isText: boolean;
   changeSubscription: any;
   changeCreateSubscription: any;
   newNote: any;
-  selectedNoteData:string;
-  selectedNoteToDelete: any=[];
+  selectedNoteData: string;
+  selectedNoteToDelete: any = [];
   changeDelSubscription: any;
   changeSearchSubscription: any;
   searchInput: any;
-  constructor(private sharedService: SharedService) { }
+  notes: { id: string; noteTime: string; noteTitle: string; noteText: string; }[];
+  constructor(private sharedService: SharedService) {
+    if (localStorage.getItem('allNotes')) {
+      this.notes = JSON.parse(localStorage.getItem('allNotes'));
+    } else {
+      this.notes = [
+        { id: '1', noteTime: '4:20 PM', noteTitle: 'note1', noteText: 'newURI notes first' },
+        { id: '2', noteTime: '4:20 PM', noteTitle: 'note2', noteText: 'newURI notes second' },
+        { id: '3', noteTime: '4:20 PM', noteTitle: 'note3', noteText: 'newURI notes third' },
+        { id: '4', noteTime: '4:20 PM', noteTitle: 'note4', noteText: 'newURI notes fourth' },
+        { id: '5', noteTime: '4:20 PM', noteTitle: 'note5', noteText: 'newURI notes fifth' },
+        { id: '6', noteTime: '4:20 PM', noteTitle: 'note6', noteText: 'newURI notes sixth' },
+        { id: '7', noteTime: '4:20 PM', noteTitle: 'note7', noteText: 'newURI notes seventh' },
+      ];
+    }
+  }
 
   ngOnInit() {
     var time = new Date();
     this.noteDefaultTime = time.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })
     this.changeSubscription = this.sharedService.isChanged.subscribe(resp => {
       if (resp == true) {
-        this.notes.unshift({ id: '8',noteTime:this.noteDefaultTime, noteTitle: 'New Note', noteText: 'No additional text' });
+        //this.notes.unshift({ id: (this.notes.length + 1).toString(), noteTime: this.noteDefaultTime, noteTitle: 'New Note', noteText: 'No additional text' });
         localStorage.setItem('allNotes', JSON.stringify(this.notes));
       }
     })
     this.changeCreateSubscription = this.sharedService.isCreateClicked.subscribe(resp => {
       if (resp == true) {
-        this.notes.unshift({ id: '8',noteTime:this.noteDefaultTime, noteTitle: this.newNote, noteText: 'No additional text' });
+
+        this.notes.unshift({ id: (this.notes.length + 1).toString(), noteTime: this.noteDefaultTime, noteTitle: this.newNote, noteText: 'No additional text' });
+
         localStorage.setItem('allNotes', JSON.stringify(this.notes));
       }
     });
@@ -56,7 +65,7 @@ export class NotesComponent implements OnInit, AfterViewInit {
     this.changeSearchSubscription = this.sharedService.isSearchClicked.subscribe(resp => {
       if (resp == true) {
         this.searchInput = this.header.searchData;
-        console.log(this.searchInput,'der');
+        console.log(this.searchInput, 'der');
       }
     });
 
@@ -65,19 +74,18 @@ export class NotesComponent implements OnInit, AfterViewInit {
     this.isText = this.createNote.isText;
 
   }
-  public doSomething(data: any): void {
-
-    var selectedObj = this.notes.map(x => {
+  public textBind(data: any): void {
+    console.log(data)
+    this.notes.map(x => {
       if (x.id == (this.notes.length).toString()) {
-        if(data == ''){
+        if (data == '') {
           x.noteTitle = 'New Note';
-        }else{
+        } else {
           x.noteTitle = data;
           this.newNote = data;
         }
       }
     });
-
   }
   public onNoteSelection(data: any): void {
 
