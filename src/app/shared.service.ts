@@ -9,4 +9,5 @@ export class SharedService {
   public isChanged = new Subject<any>();
   public isCreateClicked = new Subject<any>();
   public isDeleteClicked = new Subject<any>();
+  public isSearchClicked = new Subject<any>();
 }

@@ -29,6 +29,8 @@ export class NotesComponent implements OnInit, AfterViewInit {
   selectedNoteData:string;
   selectedNoteToDelete: any=[];
   changeDelSubscription: any;
+  changeSearchSubscription: any;
+  searchInput: any;
   constructor(private sharedService: SharedService) { }
 
   ngOnInit() {
@@ -36,13 +38,13 @@ export class NotesComponent implements OnInit, AfterViewInit {
     this.noteDefaultTime = time.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })
     this.changeSubscription = this.sharedService.isChanged.subscribe(resp => {
       if (resp == true) {
-        this.notes.unshift({ id: '8', noteTitle: 'New Note', noteText: 'No additional text' });
+        this.notes.unshift({ id: '8',noteTime:this.noteDefaultTime, noteTitle: 'New Note', noteText: 'No additional text' });
         localStorage.setItem('allNotes', JSON.stringify(this.notes));
       }
     })
     this.changeCreateSubscription = this.sharedService.isCreateClicked.subscribe(resp => {
       if (resp == true) {
-        this.notes.unshift({ id: '8', noteTitle: this.newNote, noteText: 'No additional text' });
+        this.notes.unshift({ id: '8',noteTime:this.noteDefaultTime, noteTitle: this.newNote, noteText: 'No additional text' });
         localStorage.setItem('allNotes', JSON.stringify(this.notes));
       }
     });
@@ -51,10 +53,17 @@ export class NotesComponent implements OnInit, AfterViewInit {
         this.notes = JSON.parse(localStorage.getItem('allNotes'));
       }
     });
+    this.changeSearchSubscription = this.sharedService.isSearchClicked.subscribe(resp => {
+      if (resp == true) {
+        this.searchInput = this.header.searchData;
+        console.log(this.searchInput,'der');
+      }
+    });
 
   }
   ngAfterViewInit() {
     this.isText = this.createNote.isText;
+
   }
   public doSomething(data: any): void {
 

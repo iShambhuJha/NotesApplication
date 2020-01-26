@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { SharedService } from '../shared.service';
 
 @Component({
@@ -7,12 +7,18 @@ import { SharedService } from '../shared.service';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
+
   @Input() childMessage: any=[];
   allNotes: any;
+  date: Date;
+  time: any;
+  searchData;
   constructor(private sharedservice: SharedService) { }
 
   ngOnInit() {
-
+  this.date = new Date();
+  this.time = this.date.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })
+  console.log(this.date.getTime())
   }
   onCreateClick() {
 this.sharedservice.isCreateClicked.next(true);
@@ -28,5 +34,11 @@ this.sharedservice.isCreateClicked.next(true);
     console.log('this.allNotesdeleted', this.allNotes)
     localStorage.setItem('allNotes', JSON.stringify(this.allNotes));
     this.sharedservice.isDeleteClicked.next(true);
+  }
+  search(data) {
+    console.log(data,'data')
+    this.searchData = data;
+    this.sharedservice.isSearchClicked.next(true);
+
   }
 }

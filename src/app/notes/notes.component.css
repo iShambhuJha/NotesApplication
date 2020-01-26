@@ -1,3 +1,9 @@
 .card:hover{
   background-color: #faedbc;
 }
+.highlighted{
+  background-color: yellow;
+}
+::ng-deep .yellow{
+  background: yellow;
+}

@@ -1,5 +1,8 @@
 <nav class="navbar navbar-light bg-light one-edge-shadow">
-  <span class="navbar-brand mb-0 h1">Notes App</span>
-  <span><i class="fa fa-edit fa-2x" (click)="onCreateClick()"></i> &nbsp;&nbsp;
+  <span class="navbar-brand mb-0 h1">{{date|date}} at {{time}}</span>
+  <span class="text-center h4">Notes App</span>
+  <span><input placeholder="Search..." class="form-control" (input)="search($event.target.value)"></span>
+  <span>
+    <i class="fa fa-edit fa-2x" (click)="onCreateClick()"></i> &nbsp;&nbsp;
      <i class="fa fa-trash fa-2x"  (click)="onDeleteClick()"></i></span>
 </nav>
