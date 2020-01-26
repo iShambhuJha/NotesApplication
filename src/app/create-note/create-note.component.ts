@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { SharedService } from '../shared.service';
 
 @Component({
@@ -9,7 +9,10 @@ import { SharedService } from '../shared.service';
 export class CreateNoteComponent implements OnInit {
   isText: boolean;
   @Output() onTextareaChanged: EventEmitter<any> = new EventEmitter<any>();
-  constructor( private sharedservice: SharedService) { }
+  @Input() childMessage: string;
+  changeCreateSubscription: any;
+  txtNotes: string;
+  constructor( private sharedService: SharedService) { }
 
   ngOnInit() {
     this.isText = false;
@@ -20,7 +23,7 @@ export class CreateNoteComponent implements OnInit {
         return;
       }
       this.isText = true;
-      this.sharedservice.isChanged.next(this.isText) ;
+      this.sharedService.isChanged.next(this.isText) ;
     }
     this.onTextareaChanged.emit(evt);
 }

@@ -1,4 +1,4 @@
 <br>
-  <textarea placeholder="your note here..." (input)="onTextChange($event.target.value)"></textarea>
+  <textarea placeholder="your note here..." [(ngModel)]="childMessage" (input)="onTextChange($event.target.value)">{{childMessage}}</textarea>
 
 
