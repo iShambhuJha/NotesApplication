@@ -1,0 +1,17 @@
+<div class="container-fluid">
+  <app-header></app-header>
+  <div class="row">
+  <div class="col-md-3">
+    <div class="card" *ngFor="let note of notes">
+      <div class="card-body">
+        <h5 class="card-title">{{note.noteTitle}}</h5>
+        <p class="card-text"><em>{{noteDefaultTime}}</em>&nbsp;&nbsp;{{note.noteText}}</p>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-9">
+  <app-create-note (onTextareaChanged)="doSomething($event)"></app-create-note>
+  </div>
+  </div>
+</div>
+
